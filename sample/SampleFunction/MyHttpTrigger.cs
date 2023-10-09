@@ -18,9 +18,17 @@ public class MyHttpTrigger
     public Task<HttpResponseData> Run([HttpTrigger(AuthorizationLevel.Function, "get", "post")] HttpRequestData req,
         FunctionContext executionContext)
     {
-        using var _ = _metric.Process.Time("rightnow");
-        
+        using var _ = _metric.Process.Time(nameof(MyHttpTrigger));
         _metric.Request.Inc(nameof(MyHttpTrigger));
+        _metric.Custom.LogCountInc();
+        _metric.Integration.Result("rightnow", 200);
+        var r = new Random();
+        var rInt = r.Next(0, 5);
+        if(rInt == 3)
+            _metric.Integration.Result("rightnow", 500);
+        
+        _metric.Validation.IncError("Contract");
+        
         var logger = executionContext.GetLogger("MyHttpTrigger");
         logger.LogInformation("C# HTTP trigger function processed a request.");
         _metric.Custom.LogCountInc();
@@ -32,7 +40,10 @@ public class MyHttpTrigger
 
         _metric.Exception.Inc(new NullReferenceException("Null Variable"));
 
-        Thread.Sleep(1000);
+        using (var timer = _metric.Integration.Time("rightnow"))
+        {
+            Thread.Sleep(500);
+        }
         
         return Task.FromResult(response);
     }

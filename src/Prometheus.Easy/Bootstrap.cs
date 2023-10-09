@@ -36,7 +36,7 @@ public sealed class Bootstrap
             foreach (var property in properties)
             {
                 var propertyType = property.PropertyType;
-                if (propertyType.IsSubclassOf(typeof(Core.Metric)))
+                if (propertyType.IsSubclassOf(typeof(Metric)))
                 {
                     var instance = ActivatorUtilities.CreateInstance(provider, propertyType, _labels);
                     if(instance is null) 

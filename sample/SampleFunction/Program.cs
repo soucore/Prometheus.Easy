@@ -9,7 +9,7 @@ var host = new HostBuilder()
         services.AddPrometheusClient()
         .ConfigureMetric(builder =>
         {
-            builder.AddLabel("app", "app-example");
+            // builder.AddLabel("app", "app-name");
             builder.AddMetricCenter<MetricCenter>();
         });
     })
