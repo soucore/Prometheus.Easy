@@ -1,6 +1,4 @@
-﻿using Prometheus;
-
-namespace Prometheus.Easy.Core;
+﻿namespace Prometheus.Easy.Core;
 
 public sealed class DynamicValues<TChild> where TChild : ChildBase
 {

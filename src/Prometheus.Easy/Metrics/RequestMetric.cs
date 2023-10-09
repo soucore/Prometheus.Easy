@@ -2,15 +2,21 @@
 
 namespace Prometheus.Easy.Metrics;
 
-public class RequestMetric : StatisticHandler
+public sealed class RequestMetric : Metric
 {
-    private const string InputName = "soucore_request_count";
+    private const string InputName = "app_request_count";
     private const string InputDescription = "Number of incoming requests";
     
-    public readonly Counter Count;
+    public readonly DynamicValues<Counter.Child> Count;
 
     public RequestMetric(IDictionary<string, string> defaultLabels) : base(defaultLabels)
     {
-        Count = Prometheus.Metrics.CreateCounter(InputName, InputDescription);
+        var counter = Prometheus.Metrics.CreateCounter(InputName, InputDescription, "name");
+        Count = new DynamicValues<Counter.Child>(counter);
     }
+
+    public void Inc(string nameLabel, int i = 1)
+    {
+        Count[nameLabel]?.Inc(i);
+    }   
 }

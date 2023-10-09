@@ -2,12 +2,12 @@
 
 namespace Prometheus.Easy.Core;
 
-public abstract class StatisticHandler
+public abstract class Metric
 {
     private readonly IDictionary<string, string> _defaultLabels;
     private static bool StaticLabel { get; set; }
 
-    protected StatisticHandler(IDictionary<string, string> defaultLabels)
+    protected Metric(IDictionary<string, string> defaultLabels)
     {
         _defaultLabels = defaultLabels;
         BuildLabelApp();

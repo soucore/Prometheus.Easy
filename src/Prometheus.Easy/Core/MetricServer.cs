@@ -1,22 +1,11 @@
-﻿using Prometheus;
-
-namespace Prometheus.Easy.Core;
+﻿namespace Prometheus.Easy.Core;
 
 public class MetricServer : IMetricServer
 {
-    private readonly MetricLabel _labels;
     private readonly KestrelMetricServer _server;
-
-    public MetricServer()
-    {
-        _labels = new MetricLabel();
-        var settings = new MetricsSettings();
-        _server = new KestrelMetricServer(port: settings.Port);
-    }
     
-    public MetricServer(MetricsSettings settings, MetricLabel labels)
+    public MetricServer(MetricOptions settings)
     {
-        _labels = labels;
         _server = new KestrelMetricServer(port: settings.Port);
     }
 
@@ -24,7 +13,6 @@ public class MetricServer : IMetricServer
     public void Start()
     {
         _server.Start();
-        Metric.SetMetricsToMemory(_labels.Data);
         IsRunning = true;
     }
 
