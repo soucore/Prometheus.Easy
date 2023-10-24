@@ -7,4 +7,5 @@ public class DefaultMetricCenter
     public IntegrationMetric Integration { get; set; }
     public ProcessMetric Process { get; set; }
     public ValidationMetric Validation { get; set; }
+    public MessageMetric Message { get; set; }
 }

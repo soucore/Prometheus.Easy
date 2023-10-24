@@ -13,7 +13,7 @@
         <PackageProjectUrl>https://github.com/soucore/Prometheus.Easy</PackageProjectUrl>
         <RepositoryUrl>https://github.com/soucore/Prometheus.Easy</RepositoryUrl>
         <PackageTags>metrics, prometheus, net, abstraction prometheus</PackageTags>
-        <Version>1.0.2</Version>
+        <Version>1.0.6</Version>
         <PackageLicenseUrl>https://github.com/soucore/Prometheus.Easy/blob/main/LICENSE</PackageLicenseUrl>
         <PackageReadmeFile>README.md</PackageReadmeFile>
     </PropertyGroup>
